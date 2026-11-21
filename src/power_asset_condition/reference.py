@@ -18,7 +18,7 @@ def extract_qwen2(rows: list[dict], model_ref: str, prompt: str, max_pixels: int
         raise RuntimeError("Qwen2-VL processor has no longest_edge size limit")
     processor.image_processor.size["longest_edge"] = max_pixels
     model = Qwen2VLForConditionalGeneration.from_pretrained(
-        model_ref, dtype=torch.bfloat16, device_map={"": 0},
+        model_ref, dtype=torch.bfloat16, device_map="auto",
         low_cpu_mem_usage=True, attn_implementation="sdpa").eval()
     result = []
     with torch.inference_mode():
@@ -31,8 +31,8 @@ def extract_qwen2(rows: list[dict], model_ref: str, prompt: str, max_pixels: int
                                                   return_dict=True, return_tensors="pt")
             batch = {k: (v.to("cuda:0", dtype=torch.bfloat16) if v.is_floating_point() else v.to("cuda:0"))
                      for k, v in batch.items() if hasattr(v, "to")}
-            mask = batch["input_ids"][0].eq(int(model.config.image_token_id))
             hidden = model.model(**batch, use_cache=False).last_hidden_state
+            mask = batch["input_ids"][0].eq(int(model.config.image_token_id)).to(hidden.device)
             vector = hidden[0, mask].float().mean(0).cpu().numpy()
             if vector.shape != (3584,) or not np.isfinite(vector).all():
                 raise RuntimeError("invalid Qwen2-VL 3584-wide image mean")

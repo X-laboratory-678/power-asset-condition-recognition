@@ -131,7 +131,7 @@ def train_yolo(fit_rows: list[dict], query_rows: list[dict], output_dir: Path,
                *, checkpoint: str, seed: int = 20261301, epochs: int = 8) -> dict:
     from ultralytics import YOLO
 
-    dataset = output_dir / "yolo_dataset"
+    dataset = output_dir.resolve() / "yolo_dataset"
     for label in range(11):
         (dataset / "train" / f"{label:02d}").mkdir(parents=True, exist_ok=True)
     for row in fit_rows:
@@ -140,8 +140,10 @@ def train_yolo(fit_rows: list[dict], query_rows: list[dict], output_dir: Path,
         if not link.exists():
             link.symlink_to(source)
     val_alias = dataset / "val"
+    if val_alias.is_symlink():
+        val_alias.unlink()
     if not val_alias.exists():
-        val_alias.symlink_to(dataset / "train", target_is_directory=True)
+        val_alias.symlink_to("train", target_is_directory=True)
     model = YOLO(checkpoint)
     model.train(data=str(dataset), epochs=epochs, imgsz=224, batch=64, workers=4, device=0,
                 project=str(output_dir / "ultralytics"), name="train", exist_ok=True,

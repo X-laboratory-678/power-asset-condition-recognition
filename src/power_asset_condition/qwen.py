@@ -35,9 +35,10 @@ def load_base(model_ref: str, config: dict):
     if not torch.cuda.is_available():
         raise RuntimeError("Qwen3-VL training needs one CUDA GPU")
     processor = AutoProcessor.from_pretrained(model_ref)
-    if not hasattr(processor.image_processor, "max_pixels"):
-        raise RuntimeError("Qwen3-VL processor has no max_pixels field")
-    processor.image_processor.max_pixels = int(config["image_max_pixels"])
+    size = getattr(processor.image_processor, "size", None)
+    if not isinstance(size, dict) or "longest_edge" not in size:
+        raise RuntimeError("Qwen3-VL processor has no longest_edge size limit")
+    size["longest_edge"] = int(config["image_max_pixels"])
     quant = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4",
                               bnb_4bit_compute_dtype=torch.bfloat16,
                               bnb_4bit_use_double_quant=True,
