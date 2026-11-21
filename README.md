@@ -38,6 +38,7 @@ Download the defect-supervised InsPLAD archive from the [authors' page](https://
 pacr validate-data --data-root "$DATA_ROOT" --verify-images
 PYTHONPATH=src python scripts/validate_release.py
 PYTHONPATH=src python scripts/recompute_historical.py
+PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
 ## Run the methods
@@ -64,6 +65,8 @@ pacr score --predictions outputs/fewshot_draw0_k5/fused.npz
 ```
 
 Set `--k 10` or `--k 20` for the support OOF entropy gate. The CLI uses the recorded original fold memberships in `data/provenance/fewshot_oof_folds.csv`. For a short functional run, add `--smoke-per-class 2 --smoke-queries-per-class 1 --max-updates 1` at K=5; such a run does not reproduce paper metrics. Baseline examples and method constraints are in [experiments](docs/EXPERIMENTS.md).
+
+The recorded single-RTX-4090 functional run completed data validation, one Qwen3 adapter update, frozen Qwen2-VL and DINOv2 prediction, fixed fusion, and scoring on 22 training supports and 11 Development queries. Its 9/11 accuracy is only a pipeline check. The small fused prediction file and exact validation details are in [the smoke record](records/smoke_validation.json).
 
 ## License
 
