@@ -1,0 +1,137 @@
+[
+  {
+    "table": 1,
+    "method": "完整方法：OOF 选定视觉分支 + PoolCE 融合",
+    "sha256": "c46e4ea5d3179d272c1045040e0c4d287d75c7b0eba71bf454cb4b279d8dae92",
+    "metrics_pct": [
+      98.50746268656717,
+      97.5697671891745,
+      96.96075138587108
+    ],
+    "historical_artifact": "QWEN_TOKEN_POOLING_POOLCE_NESTED_TEST_SUPPLEMENTAL_20261025/RESULTS.json"
+  },
+  {
+    "table": 1,
+    "method": "ConvNeXt-Tiny 全量微调",
+    "sha256": "2ca92fc3ae4aae5cd53e498eb781ff3e959ff3cf3e41d8f05683e083321a0353",
+    "metrics_pct": [
+      98.27784156142366,
+      97.29292613709273,
+      96.72058010373433
+    ],
+    "historical_artifact": "FINAL_TEST_MATCHED_RES192_20261026/TEST_RESULTS.json"
+  },
+  {
+    "table": 1,
+    "method": "ResNet-50 全量微调",
+    "sha256": "2ca92fc3ae4aae5cd53e498eb781ff3e959ff3cf3e41d8f05683e083321a0353",
+    "metrics_pct": [
+      98.27784156142366,
+      97.22731746711742,
+      96.55358525636231
+    ],
+    "historical_artifact": "FINAL_TEST_MATCHED_RES192_20261026/TEST_RESULTS.json"
+  },
+  {
+    "table": 1,
+    "method": "YOLO-QwenVL + LoRA 自训练（图像级改编）",
+    "sha256": "5eb35e244672ffa4e4a3d5c68cca2333e3b1cfcb514502cfb0c28a957209ae8a",
+    "metrics_pct": [
+      96.0390355912744,
+      91.83633538834542,
+      90.45834703425226
+    ],
+    "historical_artifact": "PAPER_MLLM_TEST_MATCHED_ADAPTATIONS_20261026/TEST_RESULTS.json"
+  },
+  {
+    "table": 1,
+    "method": "YOLOv8n-cls 全量微调",
+    "sha256": "b4c621d58b03444615f33b6e26d3a596bf79a6d0f50bd1374cf983496cccd80b",
+    "metrics_pct": [
+      95.69460390355913,
+      92.6824273975532,
+      91.94147775639816
+    ],
+    "historical_artifact": "TRADITIONAL_COMPARISON_PRELIMINARY/INDEPENDENT_TEST.csv"
+  },
+  {
+    "table": 1,
+    "method": "iSAFE 风格检索增强（图像级改编）",
+    "sha256": "5eb35e244672ffa4e4a3d5c68cca2333e3b1cfcb514502cfb0c28a957209ae8a",
+    "metrics_pct": [
+      91.67623421354764,
+      85.90998647050623,
+      83.67351026715006
+    ],
+    "historical_artifact": "PAPER_MLLM_TEST_MATCHED_ADAPTATIONS_20261026/TEST_RESULTS.json"
+  },
+  {
+    "table": 1,
+    "method": "DefectGLM 思路两阶段适配（Qwen3-VL 改编）",
+    "sha256": "71148cdac43755f9d8345fc815d37b75079658ee08a59cdaea4e633214567aa3",
+    "metrics_pct": [
+      87.37083811710677,
+      74.97959117986514,
+      73.20286906963157
+    ],
+    "historical_artifact": "DEFECTGLM_QWEN3VL_MATCHED_TEST_20261027/POST_COMPLETE_DESCRIPTIVE_RESULTS.json"
+  },
+  {
+    "table": 1,
+    "method": "HOG + RBF-SVM",
+    "sha256": "b4c621d58b03444615f33b6e26d3a596bf79a6d0f50bd1374cf983496cccd80b",
+    "metrics_pct": [
+      81.7451205510907,
+      61.47312681449537,
+      61.949006346966684
+    ],
+    "historical_artifact": "TRADITIONAL_COMPARISON_PRELIMINARY/INDEPENDENT_TEST.csv"
+  },
+  {
+    "table": 1,
+    "method": "LBP + RBF-SVM",
+    "sha256": "b4c621d58b03444615f33b6e26d3a596bf79a6d0f50bd1374cf983496cccd80b",
+    "metrics_pct": [
+      74.39724454649827,
+      47.93261613089836,
+      47.27520464439158
+    ],
+    "historical_artifact": "TRADITIONAL_COMPARISON_PRELIMINARY/INDEPENDENT_TEST.csv"
+  },
+  {
+    "table": 1,
+    "method": "SIFT-BoVW + LinearSVC",
+    "sha256": "b4c621d58b03444615f33b6e26d3a596bf79a6d0f50bd1374cf983496cccd80b",
+    "metrics_pct": [
+      71.52698048220437,
+      39.79212756016848,
+      39.4988696072852
+    ],
+    "historical_artifact": "TRADITIONAL_COMPARISON_PRELIMINARY/INDEPENDENT_TEST.csv"
+  },
+  {
+    "table": 3,
+    "sha256": "a3083398eb310c8daf2fadb42980650f8bfba3e1bc370b54dca549826a005bd0",
+    "historical_artifact": "scoring/K005_DEV_METRICS.json"
+  },
+  {
+    "table": 3,
+    "sha256": "4ce7ab39dda71cabfa0b98ea59c9bb331cf6a937d092cf57b2221fdaae7b0ff2",
+    "historical_artifact": "scoring/K010_DEV_DYNAMIC_METRICS.json"
+  },
+  {
+    "table": 3,
+    "sha256": "f4e803f02b47c2a1b93978b375a82395e49b7937b767dee89fe3e100d8a40b30",
+    "historical_artifact": "scoring/K020_DEV_DYNAMIC_METRICS.json"
+  },
+  {
+    "table": 4,
+    "sha256": "4fa855922b620f5287e2bc87b10983b948837f08f8b69351b9b4c737c650c200",
+    "historical_artifact": "scoring/K020_TEST_UNIFIED_METRICS.json"
+  },
+  {
+    "table": 2,
+    "sha256": "dd68eed578575cec92781469faeb4a71e2a922a12d9d9368177a6df4fb4c5a0b",
+    "historical_artifact": "QWEN_ABLATION_POOLCE_ONLY_TEST_20261026/TEST_RESULTS.json"
+  }
+]
