@@ -1,5 +1,6 @@
 {
   "purpose": "Functional end-to-end check; not a paper-result estimate",
+  "status": "Archived functional check predating the Qwen3 image-limit correction; see validation_matrix.json for the current configuration",
   "date": "2026-11-21",
   "hardware": "One NVIDIA GeForce RTX 4090",
   "software": {
