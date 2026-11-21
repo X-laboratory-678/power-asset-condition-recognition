@@ -13,8 +13,10 @@ def extract_qwen2(rows: list[dict], model_ref: str, prompt: str, max_pixels: int
     import torch
     from transformers import AutoProcessor, Qwen2VLForConditionalGeneration
 
-    processor = AutoProcessor.from_pretrained(model_ref)
-    processor.image_processor.size.longest_edge = max_pixels
+    processor = AutoProcessor.from_pretrained(model_ref, use_fast=False)
+    if not isinstance(processor.image_processor.size, dict) or "longest_edge" not in processor.image_processor.size:
+        raise RuntimeError("Qwen2-VL processor has no longest_edge size limit")
+    processor.image_processor.size["longest_edge"] = max_pixels
     model = Qwen2VLForConditionalGeneration.from_pretrained(
         model_ref, dtype=torch.bfloat16, device_map={"": 0},
         low_cpu_mem_usage=True, attn_implementation="sdpa").eval()

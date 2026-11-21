@@ -171,9 +171,17 @@ def _run_fewshot(args) -> None:
     if not set(r["sample_id"] for r in fit).issubset(teacher):
         raise ValueError("teacher cache does not cover exact current support")
     args.output.mkdir(parents=True, exist_ok=True)
-    train(args.qwen3_model or config["qwen3_model"], config, fit, _label_free(query), args.output / "adapted",
-          mode="fewshot", objective=args.objective, teacher=teacher, seed=args.seed,
-          max_updates=args.max_updates)
+    if not args.resume_adapted:
+        train(args.qwen3_model or config["qwen3_model"], config, fit, _label_free(query), args.output / "adapted",
+              mode="fewshot", objective=args.objective, teacher=teacher, seed=args.seed,
+              max_updates=args.max_updates)
+    else:
+        with np.load(args.output / "adapted/predictions.npz", allow_pickle=False) as z:
+            if z["sample_id"].astype(str).tolist() != [r["sample_id"] for r in query]:
+                raise ValueError("saved adapted predictions do not match current query IDs")
+        with np.load(args.output / "adapted/features.npz", allow_pickle=False) as z:
+            if z["sample_id"].astype(str).tolist() != [r["sample_id"] for r in fit]:
+                raise ValueError("saved adapted features do not match current support IDs")
     reference_prob, all_features = _reference_predictions(fit, query, config, args, args.output)
     with np.load(args.output / "adapted/predictions.npz", allow_pickle=False) as z:
         task_prob = z["direct_probabilities"]
@@ -331,6 +339,7 @@ def main() -> None:
     few.add_argument("--output", type=Path, required=True)
     few.add_argument("--teacher-cache", type=Path, required=True)
     few.add_argument("--objective", choices=("response", "poolce", "joint"), default="joint")
+    few.add_argument("--resume-adapted", action="store_true")
     teacher = common("generate-teacher", "fewshot")
     teacher.add_argument("--output", type=Path, required=True)
     ridge = common("frozen-qwen3-ridge", "fewshot")
