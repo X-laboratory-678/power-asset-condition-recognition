@@ -16,7 +16,9 @@ def main() -> None:
     manifest = root / "data/manifests/insplad_clean_v1.csv"
     label_by_id = {r["sample_id"]: r["leaf_id"] for r in load_manifest(manifest)}
     records = {}
-    for path in sorted((root / "records/predictions").glob("*.npz")):
+    index = json.loads((root / "records/prediction_index.json").read_text(encoding="utf-8"))
+    for entry in sorted(index, key=lambda item: item["file"]):
+        path = root / "records/predictions" / entry["file"]
         with np.load(path, allow_pickle=False) as packed:
             ids = packed["sample_id"].astype(str).tolist()
             probabilities = packed["probabilities"]
