@@ -1,0 +1,43 @@
+{
+  "purpose": "Functional end-to-end check; not a paper-result estimate",
+  "date": "2026-11-21",
+  "hardware": "One NVIDIA GeForce RTX 4090",
+  "software": {
+    "python": "3.10",
+    "torch": "2.9.1+cu128",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "scikit_learn": "1.7.2",
+    "numpy": "1.26.4"
+  },
+  "data_validation": {
+    "manifest_rows": 11525,
+    "classes": 11,
+    "image_hashes_verified": true
+  },
+  "run": {
+    "command": "train-fewshot",
+    "k": 5,
+    "draw": 0,
+    "training_supports": 22,
+    "development_queries": 11,
+    "max_updates": 1,
+    "teacher_cache": "Previously generated local cache; not included",
+    "qwen3_adapter_update_completed": true,
+    "frozen_qwen2_vl_branch_completed": true,
+    "dinov2_branch_completed": true,
+    "fixed_fusion_completed": true,
+    "score_completed": true,
+    "fusion_mode": "fixed_raw",
+    "task_weight": 0.25
+  },
+  "prediction": {
+    "file": "predictions/smoke_final.npz",
+    "sha256": "9c2f889c9d7f3b98468c1946d05d486245053154c502c975006826e209fedd49",
+    "rows": 11,
+    "correct": 9,
+    "accuracy": 0.8181818181818182,
+    "macro_f1": 0.7727272727272727,
+    "balanced_accuracy": 0.8181818181818182
+  }
+}
