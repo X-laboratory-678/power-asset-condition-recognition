@@ -21,9 +21,6 @@ dependencies = [
   "ultralytics==8.3.0",
 ]
 
-[project.optional-dependencies]
-test = ["pytest>=8,<9"]
-
 [project.scripts]
 pacr = "power_asset_condition.cli:main"
 
