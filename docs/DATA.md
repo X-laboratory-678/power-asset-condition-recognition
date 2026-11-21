@@ -1,6 +1,6 @@
 # Data reconstruction
 
-Obtain InsPLAD from the [authors' page](https://andreluizbvs.github.io/InsPLAD/) or [Mendeley Data](https://data.mendeley.com/datasets/5n3fjgvfyz/1). The authors' page displays **CC BY-NC-SA 4.0** and the Mendeley record displays **CC BY-NC 3.0**. These labels differ; consult the upstream providers before redistribution or commercial use. This repository contains no images. Its Apache-2.0 license does not cover upstream data.
+The release provides path-free manifests, image hashes, class labels and membership tables. Obtain InsPLAD from the [authors' page](https://andreluizbvs.github.io/InsPLAD/) or [Mendeley Data](https://data.mendeley.com/datasets/5n3fjgvfyz/1). The authors' page displays **CC BY-NC-SA 4.0** and the Mendeley record displays **CC BY-NC 3.0**; check the applicable upstream terms before redistributing images. Apache-2.0 covers original code in this repository.
 
 Extract the defect-supervised tree as `DATA_ROOT`. Every row in `data/manifests/insplad_clean_v1.csv` points to a relative file under that tree. The manifest has SHA-256 for each file, a stable sample ID, 11-way leaf label, original split, historical group ID, and source ID. Reconstruct and check it with:
 
@@ -8,7 +8,7 @@ Extract the defect-supervised tree as `DATA_ROOT`. Every row in `data/manifests/
 pacr validate-data --data-root "$DATA_ROOT" --verify-images
 ```
 
-Manifest SHA-256: `6d58a954fffa832e5787e87625ba7133397140db616b3f5776092fab376fb537`. Expected historical counts are 8,039 train, 1,744 val, 1,742 test. The manifest follows the research workspace's `INSPLAD-CLEAN-V1` selection and is not a claim that every archive variant has identical paths or bytes. A mismatch requires resolving archive version and extraction layout before training.
+Manifest SHA-256: `6d58a954fffa832e5787e87625ba7133397140db616b3f5776092fab376fb537`. Expected historical counts are 8,039 train, 1,744 val, 1,742 test. The manifest specifies the research workspace's `INSPLAD-CLEAN-V1` selection. Archive variants may differ in paths or bytes; match the archive version and extraction layout before training.
 
 | ID | Leaf class |
 | ---: | --- |
