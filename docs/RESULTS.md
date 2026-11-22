@@ -11,7 +11,7 @@ The saved historical full Test predictions contain 1,742 images. The original Te
 | YOLOv8n-cls | 95.695 / 92.682 / 91.941 | Manuscript-reported; prediction vectors unavailable |
 | HOG + RBF-SVM | 81.745 / 61.473 / 61.949 | Manuscript-reported; prediction vectors unavailable |
 
-For few-shot Development, the published historical fusion predictions give three-draw mean accuracies of **76.212%, 87.424%, and 92.727%** at K=5, K=10, and K=20. The K=20 historical 550-image Test subset gives 88.545% Accuracy and 88.429% Macro-F1. The manuscript reports later retained cohorts of 209 Development and 525 subset Test images; their exact row lists and audited scores are unverified here.
+For limited-label Development (K=5, 10, and 20 images per class), the published historical fusion predictions give three-draw mean accuracies of **76.212%, 87.424%, and 92.727%**. The K=20 historical 550-image Test subset gives 88.545% Accuracy and 88.429% Macro-F1. The manuscript reports later retained cohorts of 209 Development and 525 subset Test images; their exact row lists and audited scores are unverified in the available records.
 
 ## Prediction files
 
