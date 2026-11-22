@@ -14,7 +14,7 @@ This repository implements **Response–Representation Coupled Shaping** and **N
 | Representative comparisons | `pacr baseline`, `pacr frozen-qwen3-ridge` | ConvNeXt-Tiny, YOLOv8n-cls, HOG-SVM, frozen Qwen3 + Ridge |
 | Evaluation and source audit | `pacr score`, `pacr audit-cohort` | Saved probabilities, metric recomputation and source-component filtering |
 
-The published historical predictions re-score to **98.507% accuracy** on the 1,742-image full Test and **92.727% mean accuracy** across three K=20 Development draws. The [experiment guide](docs/EXPERIMENTS.md) gives baseline and ablation commands; the [result record](docs/RESULTS.md) documents the historical predictions, manuscript comparisons, and source-audited cohort. The historical Test was part of development; the result record describes the retained-cohort evidence and reconstruction inputs.
+Historical predictions yield **98.507% accuracy** on the 1,742-image full Test and **92.727% mean accuracy** across three K=20 Development draws. The [result record](docs/RESULTS.md) documents the historical Test's development use, retained-cohort audit, and metric provenance; the [experiment guide](docs/EXPERIMENTS.md) lists baseline and ablation commands.
 
 ## Get started
 
