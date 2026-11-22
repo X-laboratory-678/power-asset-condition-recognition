@@ -1,20 +1,20 @@
-# Power-asset condition recognition
+# Response-Trained Representations and Visual Reference Fusion for Power-Asset Condition Recognition
 
-This repository implements the mechanisms in **Response-Trained Representations and Visual Reference Fusion for Power-Asset Condition Recognition**. It studies 11 equipment–condition classes in InsPLAD, combining response supervision, pre-answer image-feature classification, and visual reference fusion across full-data and K=5/10/20 settings.
+This repository implements **Response–Representation Coupled Shaping** and **Native Visual Reference Fusion** for 11 equipment–condition classes in InsPLAD, across full-data and limited-label settings.
 
 ## Method
 
-The training objective couples a class response with **PoolCE on pre-answer image states**. Both losses shape shared Qwen3-VL adapters. In the full-data setting, a classifier on the adapted representation is fused with a readout of the same model's native visual features across three recorded members. In the few-shot setting, eight-field support observations train a direct head; a frozen Qwen2-VL–DINOv2 partner supplies a complementary visual prediction. K=5 uses fixed fusion, while K=10/20 fit an entropy gate from support-only out-of-fold predictions.
+**Response–Representation Coupled Shaping** trains shared Qwen3-VL adapters with class-response supervision and **PoolCE on pre-answer image states**. **Native Visual Reference Fusion** combines the adapted image-state readout with a readout of frozen native visual features in each of three full-data members. In the limited-label setting (K=5, 10, or 20 images per class), eight-field support observations and class labels train a direct head, while a frozen Qwen2-VL–DINOv2 branch supplies the visual reference. K=5 uses fixed fusion; K=10/20 fit an entropy gate from support-only out-of-fold predictions.
 
 | Path | Entry point | Published protocol |
 | --- | --- | --- |
 | Data and membership checks | `pacr validate-data` | 11,525 image hashes, 11 classes, recorded groups and support folds |
-| Full-data adaptation and fusion | `pacr train-full`, `pacr fuse-full` | Three members; response, PoolCE and joint objectives; native visual fusion |
-| Few-shot adaptation and fusion | `pacr generate-teacher`, `pacr train-fewshot` | Three draws per K; direct head, frozen partner, fixed or support OOF fusion |
+| Full-data adaptation and fusion | `pacr train-full`, `pacr fuse-full` | Three members; response, PoolCE and joint objectives; Native Visual Reference Fusion |
+| Limited-label adaptation and fusion | `pacr generate-teacher`, `pacr train-fewshot` | Three draws per K; direct head, frozen visual reference, fixed or support OOF fusion |
 | Representative comparisons | `pacr baseline`, `pacr frozen-qwen3-ridge` | ConvNeXt-Tiny, YOLOv8n-cls, HOG-SVM, frozen Qwen3 + Ridge |
 | Evaluation and source audit | `pacr score`, `pacr audit-cohort` | Saved probabilities, metric recomputation and source-component filtering |
 
-The published historical predictions re-score to **98.507% accuracy** on the 1,742-image full Test and **92.727% mean accuracy** across three K=20 Development draws. The [experiment guide](docs/EXPERIMENTS.md) gives baseline and ablation commands; the [result record](docs/RESULTS.md) separates recomputed predictions, manuscript-only comparisons, and the later source audit. Historical Test was accessed during development, and the audit's accepted link decisions are required to reconstruct its exact retained cohort.
+The published historical predictions re-score to **98.507% accuracy** on the 1,742-image full Test and **92.727% mean accuracy** across three K=20 Development draws. The [experiment guide](docs/EXPERIMENTS.md) gives baseline and ablation commands; the [result record](docs/RESULTS.md) documents the historical predictions, manuscript comparisons, and source-audited cohort. The historical Test was part of development; the result record describes the retained-cohort evidence and reconstruction inputs.
 
 ## Get started
 
